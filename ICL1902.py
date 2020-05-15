@@ -6,6 +6,5 @@ for testcase in range(T):
     while N:
         k = int(N**0.5)
         result += 1
-        N -= k*k
+        N -= k * k
     print(result)
-
