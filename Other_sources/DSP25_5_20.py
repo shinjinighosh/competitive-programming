@@ -1,0 +1,1 @@
+# Given a stream of elements (of arbitrary size), write a class to find the median at any given time. Your class should have a function to add numbers to the stream and a function to calculate the median.
