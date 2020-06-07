@@ -31,7 +31,8 @@ class BrowserHistory:
 
     def back(self, steps: int) -> str:
         if len(self.backward) <= steps:
-            self.forwards.append(self.current)
+            #self.forwards.append(self.current)
+            self.forwards = [self.current]+self.forwards
             try:
                 self.current = self.backward[0]
             except:
@@ -43,7 +44,8 @@ class BrowserHistory:
             self.backward = []
         else:
             # print("taking this route")
-            self.forwards.append(self.current)
+            #self.forwards.append(self.current)
+            self.forwards = [self.current]+self.forwards
             self.current = self.backward[-steps]
             try:
                 if steps != 1:
@@ -71,14 +73,14 @@ class BrowserHistory:
                 pass
             self.forwards = []
         else:
-            self.forwards.append(self.current)
-            self.current = self.forwards[steps]
+            #self.forwards.append(self.current)
+            self.current = self.forwards[steps-1]
             try:
-                self.backward = self.backward + self.forwards[:steps]
+                self.backward = self.forwards[:steps-1] + self.backward
             except:
                 pass
             try:
-                self.forwards = self.forwards[steps + 1:]
+                self.forwards = self.forwards[steps:]
             except:
                 pass
         print(f"Current {self.current} backward {self.backward} forward {self.forwards}")
@@ -103,11 +105,11 @@ print("go back 1")
 print(obj.back(1))
 print("go back 1")
 print(obj.back(1))
-# print("go forward 1")
-# print(obj.forward(1))
-# print(obj.visit("linkedin.com"))
-# print(obj.forward(2))
-# print(obj.back(2))
-# print(obj.back(7))
+print("go forward 1")
+print(obj.forward(1))
+print(obj.visit("linkedin.com"))
+print(obj.forward(2))
+print(obj.back(2))
+print(obj.back(7))
 
 # expected: [null,null,null,null,"facebook.com","google.com","facebook.com",null,"linkedin.com","google.com","leetcode.com"]
