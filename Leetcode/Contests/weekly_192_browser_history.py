@@ -11,6 +11,8 @@ string back(int steps) Move steps back in history. If you can only return x step
 string forward(int steps) Move steps forward in history. If you can only forward x steps in the history and steps > x, you will forward only x steps. Return the current url after forwarding in history at most steps.
 '''
 
+# CHANGE TO USE JUST ONE QUEUE with a pointer
+
 
 class BrowserHistory:
 
@@ -18,15 +20,18 @@ class BrowserHistory:
         self.backward = []
         self.forwards = []
         self.current = homepage
+        print(f"Current {self.current} backward {self.backward} forward {self.forwards}")
 
     def visit(self, url: str) -> None:
         self.backward.append(self.current)
         self.forwards = []
         self.current = url
+        print(f"Current {self.current} backward {self.backward} forward {self.forwards}")
         return None
 
     def back(self, steps: int) -> str:
         if len(self.backward) <= steps:
+            self.forwards.append(self.current)
             try:
                 self.current = self.backward[0]
             except:
@@ -37,19 +42,25 @@ class BrowserHistory:
                 pass
             self.backward = []
         else:
+            # print("taking this route")
+            self.forwards.append(self.current)
             self.current = self.backward[-steps]
             try:
-                self.forwards = self.backward[-steps + 1:] + self.forwards
+                if steps != 1:
+                    self.forwards = self.backward[-steps + 1:] + self.forwards
             except:
                 pass
             try:
                 self.backward = self.backward[:-steps]
             except:
                 pass
+
+        print(f"Current {self.current} backward {self.backward} forward {self.forwards}")
         return self.current
 
     def forward(self, steps: int) -> str:
         if len(self.forwards) <= steps:
+            self.forwards.append(self.current)
             try:
                 self.current = self.forwards[-1]
             except:
@@ -60,6 +71,7 @@ class BrowserHistory:
                 pass
             self.forwards = []
         else:
+            self.forwards.append(self.current)
             self.current = self.forwards[steps]
             try:
                 self.backward = self.backward + self.forwards[:steps]
@@ -69,6 +81,7 @@ class BrowserHistory:
                 self.forwards = self.forwards[steps + 1:]
             except:
                 pass
+        print(f"Current {self.current} backward {self.backward} forward {self.forwards}")
         return self.current
 
 
@@ -78,16 +91,23 @@ class BrowserHistory:
 # param_2 = obj.back(steps)
 # param_3 = obj.forward(steps)
 
+print("Starting at leetcode")
 obj = BrowserHistory("leetcode.com")
+print("visiting google")
 print(obj.visit("google.com"))
+print("visiting facebook")
 print(obj.visit("facebook.com"))
+print("visiting youtube")
 print(obj.visit("youtube.com"))
+print("go back 1")
 print(obj.back(1))
+print("go back 1")
 print(obj.back(1))
-print(obj.forward(1))
-print(obj.visit("linkedin.com"))
-print(obj.forward(2))
-print(obj.back(2))
-print(obj.back(7))
+# print("go forward 1")
+# print(obj.forward(1))
+# print(obj.visit("linkedin.com"))
+# print(obj.forward(2))
+# print(obj.back(2))
+# print(obj.back(7))
 
 # expected: [null,null,null,null,"facebook.com","google.com","facebook.com",null,"linkedin.com","google.com","leetcode.com"]
