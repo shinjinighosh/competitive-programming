@@ -88,3 +88,6 @@ print(obj.forward(1))
 print(obj.visit("linkedin.com"))
 print(obj.forward(2))
 print(obj.back(2))
+print(obj.back(7))
+
+# expected: [null,null,null,null,"facebook.com","google.com","facebook.com",null,"linkedin.com","google.com","leetcode.com"]
