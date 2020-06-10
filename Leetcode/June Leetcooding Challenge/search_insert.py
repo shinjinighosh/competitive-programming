@@ -17,3 +17,12 @@ class Solution:
         if len(nums) == 1 and target > nums[0]:
             return 1
         return i + 2
+
+        # alternate faster solution
+        '''
+        if target in nums:
+            return nums.index(target)
+        else:
+            nums.append(target)
+            return sorted(nums).index(target)
+        '''
