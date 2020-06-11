@@ -22,6 +22,8 @@ addNum(3)
 findMedian() -> 2
 '''
 
+import heapq
+
 
 class MedianFinder:
 
@@ -39,7 +41,7 @@ class MedianFinder:
     def findMedian(self) -> float:
         return 1.0
 
-        # Your MedianFinder object will be instantiated and called as such:
-        # obj = MedianFinder()
-        # obj.addNum(num)
-        # param_2 = obj.findMedian()
+# Your MedianFinder object will be instantiated and called as such:
+# obj = MedianFinder()
+# obj.addNum(num)
+# param_2 = obj.findMedian()
