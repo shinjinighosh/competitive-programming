@@ -8,24 +8,37 @@ Given an array nums of n integers, are there elements a, b, c in nums such that 
 class Solution:
     def threeSum(self, nums):
         def twoSum(nums, target):
+            res = set()
             mapping = {}
             for i in range(len(nums)):
                 if (target - nums[i]) in mapping:
-                    return [i, mapping[target - nums[i]]]
+                    res.add((nums[i], target - nums[i],))
+                    # return [nums[i], target - nums[i]]
+                    # return [i, mapping[target - nums[i]]]
                 else:
                     mapping[nums[i]] = i
-            return None
+            return res
+
         res = set()
         for i in range(len(nums)):
             temp = [nums[i]]
+            old = nums[i]
+            # print(f"temp is {temp} and passing to twoSum {nums[i+1:]} and {-1 * nums[i]}")
             k = twoSum(nums[i + 1:], -1 * nums[i])
             if k:
-                a, b = k
-                # temp.add(nums[a])
-                # temp.add(nums[b])
-                temp.extend([nums[a], nums[b]])
-                res.add(tuple(temp))
-                # res.append(temp)
+                print(f"k is {k} and old is {old}")
+                for other_2 in k:
+                    a, b = other_2[0], other_2[1]
+                    # print(f"three candidates are {old, a, b}")
+                    res.add(tuple(sorted([old, a, b])))
+                    # res.add(frozenset([old] + list(other_2)))
+                    # temp.add(nums[a])
+                    # temp.add(nums[b])
+                    # temp.extend([a, b])
+                    # temp.extend([nums[a], nums[b]])
+                    # res.add(frozenset(temp))
+                    # res.append(temp)
+                print(f"res is {res}")
         return list(list(i) for i in res)
 
 
