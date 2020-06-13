@@ -55,6 +55,7 @@ class MinHeap:
     def get_right_child(self, idx):
         return (idx * 2) + 2
 
+    # O(log n)
     def insert(self, n):
         self.heap.append(n)
         cur_idx = len(self.heap) - 1
