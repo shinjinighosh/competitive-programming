@@ -9,19 +9,33 @@ Return the number of cells with odd values in the matrix after applying the incr
 
 class Solution:
     def oddCells(self, n: int, m: int, indices: List[List[int]]) -> int:
-        # O(mnk) solution: for every cell, add to res if it ends up odd
+        # faster O(mn+k) solution
         res = 0
-        matrix = [[0 for c in range(m)] for r in range(n)]
-        for row in range(n):
-            for col in range(m):
-                for ri, ci in indices:
-                    if row == ri:
-                        matrix[row][col] += 1
-                    if col == ci:
-                        matrix[row][col] += 1
-
-        for row in range(n):
-            for col in range(m):
-                if matrix[row][col] % 2 == 1:
+        xs = {i: 0 for i in range(n)}
+        ys = {i: 0 for i in range(m)}
+        for ri, ci in indices:
+            xs[ri] += 1
+            ys[ci] += 1
+        for r in range(n):
+            x_val = xs[r]
+            for c in range(m):
+                if (x_val + ys[c]) % 2 == 1:
                     res += 1
         return res
+
+        # O(mnk) solution: for every cell, add to res if it ends up odd
+        # res = 0
+        # matrix = [[0 for c in range(m)] for r in range(n)]
+        # for row in range(n):
+        #     for col in range(m):
+        #         for ri, ci in indices:
+        #             if row == ri:
+        #                 matrix[row][col] += 1
+        #             if col == ci:
+        #                 matrix[row][col] += 1
+        #
+        # for row in range(n):
+        #     for col in range(m):
+        #         if matrix[row][col] % 2 == 1:
+        #             res += 1
+        # return res
