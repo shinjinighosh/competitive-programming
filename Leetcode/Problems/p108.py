@@ -1,3 +1,37 @@
+'''
+Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+Example:
+
+Given the sorted array: [-10,-3,0,5,9],
+
+One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
+
+      0
+     / \
+   -3   9
+   /   /
+ -10  5
+
+arr = [-2, 4, 5, 7, 9, 10]
+
+       7
+      / \
+     4   10
+   /  \  /
+  -2  5   9
+
+pseudocode:
+--> choose a root, len(arr) = n, choosing
+    ceil((n+1)/2)
+--> recurse on left and right sides
+--> base case: if either side has length 1, just append as a leaf node
+
+'''
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
