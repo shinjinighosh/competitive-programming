@@ -42,6 +42,16 @@ class TreeNode:
 
 
 class Solution:
+    # alternate faster solution
+    # def sortedArrayToBST(self, arr) -> TreeNode:
+    #     if not arr:
+    #         return None
+    #     mid = len(arr) // 2
+    #     root = TreeNode(arr[mid])
+    #     root.left = self.sortedArrayToBST(arr[:mid])
+    #     root.right = self.sortedArrayToBST(arr[mid + 1:])
+    #     return root
+
     def sortedArrayToBST(self, arr) -> TreeNode:
         if not arr:
             return None
