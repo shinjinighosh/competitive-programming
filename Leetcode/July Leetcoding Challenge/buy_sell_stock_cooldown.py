@@ -1,0 +1,25 @@
+# Best Time to Buy and Sell Stock with Cooldown
+
+'''
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times) with the following restrictions:
+
+You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+After you sell your stock, you cannot buy stock on next day. (ie, cooldown 1 day)
+'''
+
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
+        if n <= 1:
+            return 0
+
+        diff = [prices[i + 1] - prices[i] for i in range(n - 1)]
+        dp, dp_max = [0] * (n + 1), [0] * (n + 1)
+        for i in range(n - 1):
+            dp[i] = diff[i] + max(dp_max[i - 3], dp[i - 1])
+            dp_max[i] = max(dp_max[i - 1], dp[i])
+
+        return dp_max[-3]
