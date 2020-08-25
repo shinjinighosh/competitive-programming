@@ -13,6 +13,18 @@ Find the sum of all left leaves in a given binary tree.
 
 
 class Solution:
+    def sumOfLeftLeaves(self, root: TreeNode, isLeftChild=False) -> int:
+        # if not root:
+        #     return 0
+        # if not root.left:
+        #     return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+        # return root.left.val + self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+        if not root:
+            return 0
+        if not root.left and not root.right:
+            return root.val if isLeftChild else 0
+        return self.sumOfLeftLeaves(root.left, True) + self.sumOfLeftLeaves(root.right, False)
+
     def sumOfLeftLeaves(self, root: TreeNode) -> int:
         if not root:
             return 0
